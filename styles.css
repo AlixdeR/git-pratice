@@ -1,0 +1,111 @@
+#body-main {
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url("./images/Tartan.jpg");
+    background-repeat: round;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+#grid {
+    width: 600px;
+    height: 600px;
+    margin: 10px;
+    background-image: url("./images/prince-charles.jpg");
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+#snake {
+    width: 60px;
+    height: 60px;
+    background-image: url("./images/scottish-hat.png");
+}
+
+#right-side {
+    height: 600px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    width: 150px;
+    height: 50px;
+    margin: 20px;
+    border-radius: 5px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder  ;
+
+}
+
+#left-side {
+    height: 600px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#score {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 100px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    width: 180px;
+    color: white;
+    font-size: 3em;
+    font-weight: bolder;
+    margin: 40px;
+}
+
+#rules-div {
+    width: 250px;
+    height: 250px;
+    border: 1px solid black;
+}
+
+#rules {
+    font-family: 'Quicksand', sans-serif;
+    text-align: justify;
+    padding: 10px;
+}
+
+#game-over {
+    font-size: 10em;
+    width: 500px;
+    height: 500px;
+    margin: 50px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#you-win {
+    font-size: 10em;
+    width: 500px;
+    height: 500px;
+    margin: 50px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
