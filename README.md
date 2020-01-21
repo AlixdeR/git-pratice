@@ -1,1 +1,1 @@
-# git-pratice
+# git-game
