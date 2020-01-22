@@ -36,16 +36,32 @@ scoreDiv.id = "score";
 scoreDiv.innerHTML = `YOUR SCORE<br><br>${score}`;
 document.getElementById("left-side").appendChild(scoreDiv);
 
-function gifHidden() {
+function gameOverHidden() {
     document.location.reload(true);
     document.getElementById("img-boris").style.visibility = "hidden";
     document.getElementById("gif-game-over").style.visibility = "hidden";
 }
 
 function gameOver() {
+    clearInterval(setInt);
+    clearInterval(setIntBoris);
+    clearInterval(setIntPint);
     document.getElementById("img-boris").style.visibility = "visible";
     document.getElementById("gif-game-over").style.visibility = "visible";
-    setTimeout(gifHidden, 5000);
+    setTimeout(gameOverHidden, 5000);
+}
+
+function youWinHidden(){
+    document.location.reload(true);
+    document.getElementById("gif-you-win").style.visibility = "hidden";
+}
+
+function youWin() {
+    clearInterval(setInt);
+    clearInterval(setIntBoris);
+    clearInterval(setIntPint);
+    document.getElementById("gif-you-win").style.visibility = "visible";
+    setTimeout(youWinHidden, 5000);
 }
 
 function intervalID() {
@@ -148,7 +164,7 @@ function checkColWithPints() {
         removePint();
         createPint();
     }
-    if (score === 10) {
+    if (score === 2) {
         youWin();
     }
 }
@@ -209,9 +225,11 @@ btnStopDiv.onclick = function () {
 
 var windowObjRefRules;
 
-btnRules.onclick = function openPopUpRules() {
-    windowObjRefRules = window.open(
-        "rules.html",
-        "",
-        "width=300px, height=300px");
+function hideRules() {
+    document.getElementById("rules").style.visibility = "hidden";
+}
+
+btnRules.onclick = function openRules() {
+    document.getElementById("rules").style.visibility = "visible";
+    setTimeout(hideRules, 5000);
 }

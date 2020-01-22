@@ -5,7 +5,6 @@
     background-repeat: round;
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
-    opacity: 0.9;
 }
 
 #grid {
@@ -74,39 +73,18 @@ h1 {
     margin: 40px;
 }
 
-#rules-div {
-    width: 250px;
-    height: 250px;
-    border: 1px solid black;
-}
-
 #rules {
+    width: 500px;
+    height: 250px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
     font-family: 'Quicksand', sans-serif;
     text-align: justify;
-    padding: 10px;
-}
-
-#game-over-container {
-    width: 600px;
-    height: 600px;
-    font-size: 3em;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#you-win {
-    font-size: 5em;
-    width: 500px;
-    height: 500px;
-    margin: 10px;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 185px;
+    left: 370px;
+    visibility: hidden;
 }
 
 #img-boris {
@@ -114,10 +92,16 @@ h1 {
     position: absolute;
     top: 45px;
     left: 400px;
-
 }
 
 #gif-game-over {
+    position: absolute;
+    top: 250px;
+    left: 380px;
+    visibility: hidden;
+}
+
+#gif-you-win {
     position: absolute;
     top: 250px;
     left: 380px;
