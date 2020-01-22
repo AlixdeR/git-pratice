@@ -134,7 +134,7 @@ h2 {
 
 #rules {
     width: 500px;
-    height: 270px;
+    height: 335px;
     background-color: white;
     border-radius: 5px;
     font-family: 'Quicksand', sans-serif;
@@ -147,7 +147,7 @@ h2 {
 
 #rules-text {
     font-size: 14px;
-    padding: 0 15px 15px 15px;
+    padding: 0 20px 20px 20px;
     text-align: justify;
 }
 

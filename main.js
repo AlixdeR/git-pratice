@@ -280,5 +280,5 @@ function hideRules() {
 
 btnRules.onclick = function openRules() {
     document.getElementById("rules").style.visibility = "visible";
-    setTimeout(hideRules, 20000);
+    setTimeout(hideRules, 30000);
 }
