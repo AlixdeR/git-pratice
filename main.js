@@ -36,50 +36,16 @@ scoreDiv.id = "score";
 scoreDiv.innerHTML = `YOUR SCORE<br><br>${score}`;
 document.getElementById("left-side").appendChild(scoreDiv);
 
-var windowObjRefGameOver;
-
-function popUpGameOver() {
-    windowObjRefGameOver = window.open(
-        "game-over.html",
-        "",
-        "width=600px, height=600px");
-    console.log(windowObjRefGameOver);
-}
-
-function closePopUpGameOver() {
-    windowObjRefGameOver.close();
+function gifHidden() {
     document.location.reload(true);
+    document.getElementById("img-boris").style.visibility = "hidden";
+    document.getElementById("gif-game-over").style.visibility = "hidden";
 }
 
 function gameOver() {
-    clearInterval(setInt);
-    clearInterval(setIntBoris);
-    clearInterval(setIntPint);
-    popUpGameOver();
-    setTimeout(closePopUpGameOver, 2000);
-}
-
-var windowObjRefYouWin;
-
-function popUpYouWin() {
-    windowObjRefYouWin = window.open(
-        "you-win.html",
-        "",
-        "width=600px, height=600px");
-    console.log(windowObjRefYouWin);
-}
-
-function closePopUpYouWin() {
-    windowObjRefYouWin.close();
-    document.location.reload(true);
-}
-
-function youWin() {
-    clearInterval(setInt);
-    clearInterval(setIntBoris);
-    clearInterval(setIntPint);
-    popUpYouWin();
-    setTimeout(closePopUpYouWin, 2000);
+    document.getElementById("img-boris").style.visibility = "visible";
+    document.getElementById("gif-game-over").style.visibility = "visible";
+    setTimeout(gifHidden, 5000);
 }
 
 function intervalID() {
@@ -161,8 +127,8 @@ function createPint() {
     pintDiv.style.width = "60px";
     pintDiv.style.height = "60px";
     pintDiv.style.backgroundImage = "url('./images/pint.png')";
-    pintDiv.style.gridRowStart = Math.floor(Math.random() * 9);
-    pintDiv.style.gridColumnStart = Math.floor(Math.random() * 9);
+    pintDiv.style.gridRowStart = Math.floor(Math.random() * 10);
+    pintDiv.style.gridColumnStart = Math.floor(Math.random() * 10);
     document.getElementById("grid").appendChild(pintDiv);
 }
 
@@ -190,7 +156,7 @@ function checkColWithPints() {
 function pintToCatch() {
     createPint();
     setInterval(checkColWithPints, 1);
-    setTimeout(removePint, 5000);
+    setTimeout(removePint, 3000);
 }
 
 function createBoris() {

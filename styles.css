@@ -12,7 +12,7 @@
     width: 600px;
     height: 600px;
     margin: 10px;
-    background-image: url("./images/prince-charles.jpg");
+    background-image: url("./images/test2\ -\ copie.jpg");
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
@@ -86,11 +86,10 @@ h1 {
     padding: 10px;
 }
 
-#game-over {
-    font-size: 10em;
-    width: 500px;
-    height: 500px;
-    margin: 50px;
+#game-over-container {
+    width: 600px;
+    height: 600px;
+    font-size: 3em;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -99,13 +98,28 @@ h1 {
 }
 
 #you-win {
-    font-size: 10em;
+    font-size: 5em;
     width: 500px;
     height: 500px;
-    margin: 50px;
+    margin: 10px;
     display: flex;
     text-align: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#img-boris {
+    visibility: hidden;
+    position: absolute;
+    top: 45px;
+    left: 400px;
+
+}
+
+#gif-game-over {
+    position: absolute;
+    top: 250px;
+    left: 380px;
+    visibility: hidden;
 }
