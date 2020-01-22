@@ -22,6 +22,11 @@ btnStartDiv.classList.add("btn");
 btnStartDiv.textContent = "START THE GAME";
 document.getElementById("right-side").appendChild(btnStartDiv);
 
+var btnCloseStart = document.createElement("button");
+btnCloseStart.classList.add("btn-close");
+btnCloseStart.textContent = "X";
+document.getElementById("levels").appendChild(btnCloseStart);
+
 var btnStopDiv = document.createElement("button");
 btnStopDiv.classList.add("btn");
 btnStopDiv.textContent = "RESET THE GAME";
@@ -31,6 +36,11 @@ var btnRules = document.createElement("button");
 btnRules.classList.add("btn");
 btnRules.textContent = "WTF IS THAT GAME?";
 document.getElementById("right-side").appendChild(btnRules);
+
+var btnCloseRules = document.createElement("button");
+btnCloseRules.classList.add("btn-close");
+btnCloseRules.textContent = "X";
+document.getElementById("rules").appendChild(btnCloseRules);
 
 var btnEasy = document.createElement("button");
 btnEasy.classList.add("btn");
@@ -244,13 +254,12 @@ btnStopDiv.onclick = function () {
     window.location.reload();
 }
 
-function hideBtnStart() {
-    document.getElementById("levels").style.visibility = "hidden";
-}
-
 btnStartDiv.onclick = function () {
     document.getElementById("levels").style.visibility = "visible";
-    setTimeout(hideBtnStart, 5000);
+}
+
+btnCloseStart.onclick = function closeStart() {
+    document.getElementById("levels").style.visibility = "hidden";
 }
 
 btnEasy.onclick = function () {
@@ -274,11 +283,10 @@ btnHard.onclick = function () {
     setIntPint = setInterval(pintToCatch, 3000);
 }
 
-function hideRules() {
-    document.getElementById("rules").style.visibility = "hidden";
-}
-
 btnRules.onclick = function openRules() {
     document.getElementById("rules").style.visibility = "visible";
-    setTimeout(hideRules, 30000);
+}
+
+btnCloseRules.onclick = function closeRules() {
+    document.getElementById("rules").style.visibility = "hidden";
 }
