@@ -11,6 +11,9 @@
     width: 600px;
     height: 600px;
     margin: 10px;
+    position: absolute;
+    top: 18px;
+    left: 328px;
     background-image: url("./images/test2\ -\ copie.jpg");
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -21,6 +24,15 @@
     width: 60px;
     height: 60px;
     background-image: url("./images/scottish-hat.png");
+    filter: contrast(150%);
+}
+
+#boris {
+    filter: contrast(150%);
+}
+
+#pint {
+    filter: contrast(150%);
 }
 
 #right-side {
@@ -38,7 +50,7 @@
     margin: 20px;
     border-radius: 5px;
     font-family: 'Quicksand', sans-serif;
-    font-weight: bolder  ;
+    font-weight: bolder;
 
 }
 
@@ -55,6 +67,9 @@
     width: 150px;
     height: 150px;
     margin-bottom: 100px;
+    position: absolute;
+    top: 200px;
+    left: 1050px;
     text-align: center;
     background-color: white;
     border-radius: 5px;
@@ -73,37 +88,90 @@ h1 {
     margin: 40px;
 }
 
-#rules {
-    width: 500px;
-    height: 250px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-    font-family: 'Quicksand', sans-serif;
-    text-align: justify;
+#finish {
     position: absolute;
-    top: 185px;
-    left: 370px;
+    width: 600px;
+    height: 600px;
+    background-image: url("./images/test2\ -\ copie.jpg");
+    top: 28px;
+    left: 338px;
     visibility: hidden;
 }
 
 #img-boris {
     visibility: hidden;
     position: absolute;
-    top: 45px;
-    left: 400px;
+    top: 20px;
+    left: 80px;
 }
 
 #gif-game-over {
     position: absolute;
-    top: 250px;
-    left: 380px;
+    top: 240px;
+    left: 70px;
     visibility: hidden;
 }
 
 #gif-you-win {
     position: absolute;
-    top: 250px;
-    left: 380px;
+    top: 295px;
+    left: 55px;
     visibility: hidden;
+}
+
+#img-duke {
+    visibility: hidden;
+    position: absolute;
+    left: 140px;
+    bottom: 185px;
+    filter: contrast(150%);
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
+#rules {
+    width: 500px;
+    height: 270px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: 'Quicksand', sans-serif;
+    text-align: justify;
+    position: absolute;
+    top: 200px;
+    left: 395px;
+    visibility: hidden;
+}
+
+#rules-text {
+    font-size: 14px;
+    padding: 0 15px 15px 15px;
+    text-align: justify;
+}
+
+#levels {
+    width: 440px;
+    height: 190px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: 'Quicksand', sans-serif;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 200px;
+    left: 395px;
+    visibility: hidden;
+}
+
+#levels-btn {
+    width: 400px;
+    height: 95px;
+    display: flex;
+    flex-direction: row;
 }

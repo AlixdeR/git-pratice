@@ -7,6 +7,9 @@ document.getElementById("grid").appendChild(snakeDiv);
 var setInt;
 var setIntBoris;
 var setIntPint;
+var checkInterval2;
+var checkInterval;
+var win = false;
 
 const snake = {
     x: Number(document.getElementById("snake").style.gridRowStart),
@@ -21,13 +24,28 @@ document.getElementById("right-side").appendChild(btnStartDiv);
 
 var btnStopDiv = document.createElement("button");
 btnStopDiv.classList.add("btn");
-btnStopDiv.textContent = "STOP THE GAME";
+btnStopDiv.textContent = "RESET THE GAME";
 document.getElementById("right-side").appendChild(btnStopDiv);
 
 var btnRules = document.createElement("button");
 btnRules.classList.add("btn");
 btnRules.textContent = "WTF IS THAT GAME?";
 document.getElementById("right-side").appendChild(btnRules);
+
+var btnEasy = document.createElement("button");
+btnEasy.classList.add("btn");
+btnEasy.textContent = "EASY";
+document.getElementById("levels-btn").appendChild(btnEasy);
+
+var btnMedium = document.createElement("button");
+btnMedium.classList.add("btn");
+btnMedium.textContent = "MEDIUM";
+document.getElementById("levels-btn").appendChild(btnMedium);
+
+var btnHard = document.createElement("button");
+btnHard.classList.add("btn");
+btnHard.textContent = "HARD";
+document.getElementById("levels-btn").appendChild(btnHard);
 
 var score = 0;
 
@@ -37,31 +55,41 @@ scoreDiv.innerHTML = `YOUR SCORE<br><br>${score}`;
 document.getElementById("left-side").appendChild(scoreDiv);
 
 function gameOverHidden() {
-    document.location.reload(true);
     document.getElementById("img-boris").style.visibility = "hidden";
     document.getElementById("gif-game-over").style.visibility = "hidden";
+    document.getElementById("finish").style.visibility = "hidden";
+    window.location.reload();
 }
 
 function gameOver() {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
+    clearInterval(checkInterval);
+    clearInterval(checkInterval2);
+    document.getElementById("finish").style.visibility = "visible";
     document.getElementById("img-boris").style.visibility = "visible";
     document.getElementById("gif-game-over").style.visibility = "visible";
-    setTimeout(gameOverHidden, 5000);
+    setTimeout(gameOverHidden, 3000);
 }
 
 function youWinHidden(){
-    document.location.reload(true);
     document.getElementById("gif-you-win").style.visibility = "hidden";
+    document.getElementById("img-duke").style.visibility = "hidden";
+    document.getElementById("finish").style.visibility = "hidden";
+    window.location.reload();
 }
 
 function youWin() {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
+    clearInterval(checkInterval);
+    clearInterval(checkInterval2);
+    document.getElementById("finish").style.visibility = "visible";
+    document.getElementById("img-duke").style.visibility = "visible";
     document.getElementById("gif-you-win").style.visibility = "visible";
-    setTimeout(youWinHidden, 5000);
+    setTimeout(youWinHidden, 3000);
 }
 
 function intervalID() {
@@ -164,14 +192,15 @@ function checkColWithPints() {
         removePint();
         createPint();
     }
-    if (score === 2) {
+    if (score === 10 && !win) {
+        win = true;
         youWin();
     }
 }
 
 function pintToCatch() {
     createPint();
-    setInterval(checkColWithPints, 1);
+    checkInterval2 = setInterval(checkColWithPints, 1);
     setTimeout(removePint, 3000);
 }
 
@@ -204,26 +233,46 @@ function checkColWithBoris() {
 
 function borisToAvoid() {
     createBoris();
-    setInterval(checkColWithBoris, 1);
+    checkInterval = setInterval(checkColWithBoris, 1);
     setTimeout(removeBoris, 3000);
-}
-
-var intervalTime = 1000;
-
-btnStartDiv.onclick = function () {
-    setInt = setInterval(intervalID, intervalTime);
-    setIntBoris = setInterval(borisToAvoid, 1000);
-    setIntPint = setInterval(pintToCatch, 3000);
 }
 
 btnStopDiv.onclick = function () {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
-    document.location.reload(true);
+    window.location.reload();
 }
 
-var windowObjRefRules;
+function hideBtnStart() {
+    document.getElementById("levels").style.visibility = "hidden";
+}
+
+btnStartDiv.onclick = function () {
+    document.getElementById("levels").style.visibility = "visible";
+    setTimeout(hideBtnStart, 5000);
+}
+
+btnEasy.onclick = function () {
+    document.getElementById("levels").style.visibility = "hidden";
+    setInt = setInterval(intervalID, 1500);
+    setIntBoris = setInterval(borisToAvoid, 2000);
+    setIntPint = setInterval(pintToCatch, 1000);
+}
+
+btnMedium.onclick = function () {
+    document.getElementById("levels").style.visibility = "hidden";
+    setInt = setInterval(intervalID, 1000);
+    setIntBoris = setInterval(borisToAvoid, 1000);
+    setIntPint = setInterval(pintToCatch, 2000);
+}
+
+btnHard.onclick = function () {
+    document.getElementById("levels").style.visibility = "hidden";
+    setInt = setInterval(intervalID, 500);
+    setIntBoris = setInterval(borisToAvoid, 500);
+    setIntPint = setInterval(pintToCatch, 3000);
+}
 
 function hideRules() {
     document.getElementById("rules").style.visibility = "hidden";
@@ -231,5 +280,5 @@ function hideRules() {
 
 btnRules.onclick = function openRules() {
     document.getElementById("rules").style.visibility = "visible";
-    setTimeout(hideRules, 5000);
+    setTimeout(hideRules, 20000);
 }
