@@ -7,8 +7,8 @@ document.getElementById("grid").appendChild(snakeDiv);
 var setInt;
 var setIntBoris;
 var setIntPint;
-var checkInterval2;
-var checkInterval;
+var checkInterval2 = [];
+var checkInterval = [];
 var win = false;
 
 const snake = {
@@ -75,8 +75,12 @@ function gameOver() {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
-    clearInterval(checkInterval);
-    clearInterval(checkInterval2);
+    for(const inter of checkInterval) {
+        clearInterval(inter);
+    };
+    for(const inter of checkInterval2) {
+        clearInterval(inter);
+    };
     document.getElementById("finish").style.visibility = "visible";
     document.getElementById("img-boris").style.visibility = "visible";
     document.getElementById("gif-game-over").style.visibility = "visible";
@@ -94,8 +98,12 @@ function youWin() {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
-    clearInterval(checkInterval);
-    clearInterval(checkInterval2);
+    for(const inter of checkInterval) {
+        clearInterval(inter);
+    };
+    for(const inter of checkInterval2) {
+        clearInterval(inter);
+    };
     document.getElementById("finish").style.visibility = "visible";
     document.getElementById("img-duke").style.visibility = "visible";
     document.getElementById("gif-you-win").style.visibility = "visible";
@@ -210,8 +218,9 @@ function checkColWithPints() {
 
 function pintToCatch() {
     createPint();
-    checkInterval2 = setInterval(checkColWithPints, 1);
-    setTimeout(removePint, 3000);
+    let newInterval = setInterval(checkColWithPints, 1);
+    checkInterval2.push(newInterval);
+    setTimeout(removePint, 5000);
 }
 
 function createBoris() {
@@ -237,14 +246,14 @@ function checkColWithBoris() {
     if (snake.x === boris.x && snake.y === boris.y) {
         removeBoris();
         gameOver();
-
     }
 }
 
 function borisToAvoid() {
     createBoris();
-    checkInterval = setInterval(checkColWithBoris, 1);
-    setTimeout(removeBoris, 3000);
+    let newInterval = setInterval(checkColWithBoris, 1);
+    checkInterval.push(newInterval)
+    setTimeout(removeBoris, 2000);
 }
 
 btnStopDiv.onclick = function () {
@@ -264,9 +273,9 @@ btnCloseStart.onclick = function closeStart() {
 
 btnEasy.onclick = function () {
     document.getElementById("levels").style.visibility = "hidden";
-    setInt = setInterval(intervalID, 1500);
-    setIntBoris = setInterval(borisToAvoid, 2000);
-    setIntPint = setInterval(pintToCatch, 1000);
+    setInt = setInterval(intervalID, 1000);
+    setIntBoris = setInterval(borisToAvoid, 3000);
+    setIntPint = setInterval(pintToCatch, 2000);
 }
 
 btnMedium.onclick = function () {
