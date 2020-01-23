@@ -188,3 +188,7 @@ h2 {
     display: flex;
     flex-direction: row;
 }
+
+#yo {
+    color: black;
+}
