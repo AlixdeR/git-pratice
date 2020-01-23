@@ -151,6 +151,19 @@ h2 {
     text-align: justify;
 }
 
+.btn-close {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    position: absolute;
+    top: 20px;
+    left: 465px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #levels {
     width: 440px;
     height: 190px;
