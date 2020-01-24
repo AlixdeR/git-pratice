@@ -11,11 +11,21 @@ var checkInterval2 = [];
 var checkInterval = [];
 var win = false;
 
-const snake = {
+var snake = {
     x: Number(document.getElementById("snake").style.gridRowStart),
     y: Number(document.getElementById("snake").style.gridColumnStart),
     direction: "N"
-}
+};
+
+var gridDiv = document.getElementById("grid");
+var levelsDiv = document.getElementById("levels");
+var rulesDiv = document.getElementById("rules");
+
+var gifGameOver = document.getElementById("gif-game-over");
+var ImgBoris = document.getElementById("img-boris");
+var gifYouWin = document.getElementById("gif-you-win");
+var ImgDuke = document.getElementById("img-duke");
+var finishTemplate =  document.getElementById("finish");
 
 var btnStartDiv = document.createElement("button");
 btnStartDiv.classList.add("btn");
@@ -65,9 +75,9 @@ scoreDiv.innerHTML = `YOUR SCORE<br><br>${score}`;
 document.getElementById("left-side").appendChild(scoreDiv);
 
 function gameOverHidden() {
-    document.getElementById("img-boris").style.visibility = "hidden";
-    document.getElementById("gif-game-over").style.visibility = "hidden";
-    document.getElementById("finish").style.visibility = "hidden";
+    ImgBoris.style.visibility = "hidden";
+    gifGameOver.style.visibility = "hidden";
+    finishTemplate.style.visibility = "hidden";
     window.location.reload();
 }
 
@@ -75,22 +85,16 @@ function gameOver() {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
-    for(const inter of checkInterval) {
-        clearInterval(inter);
-    };
-    for(const inter of checkInterval2) {
-        clearInterval(inter);
-    };
-    document.getElementById("finish").style.visibility = "visible";
-    document.getElementById("img-boris").style.visibility = "visible";
-    document.getElementById("gif-game-over").style.visibility = "visible";
+    finishTemplate.style.visibility = "visible";
+    ImgBoris.style.visibility = "visible";
+    gifGameOver.style.visibility = "visible";
     setTimeout(gameOverHidden, 3000);
 }
 
 function youWinHidden(){
-    document.getElementById("gif-you-win").style.visibility = "hidden";
-    document.getElementById("img-duke").style.visibility = "hidden";
-    document.getElementById("finish").style.visibility = "hidden";
+    gifYouWin.style.visibility = "hidden";
+    ImgDuke.style.visibility = "hidden";
+    finishTemplate.style.visibility = "hidden";
     window.location.reload();
 }
 
@@ -98,41 +102,19 @@ function youWin() {
     clearInterval(setInt);
     clearInterval(setIntBoris);
     clearInterval(setIntPint);
-    for(const inter of checkInterval) {
-        clearInterval(inter);
-    };
-    for(const inter of checkInterval2) {
-        clearInterval(inter);
-    };
-    document.getElementById("finish").style.visibility = "visible";
-    document.getElementById("img-duke").style.visibility = "visible";
-    document.getElementById("gif-you-win").style.visibility = "visible";
+    finishTemplate.style.visibility = "visible";
+    ImgDuke.style.visibility = "visible";
+    gifYouWin.style.visibility = "visible";
     setTimeout(youWinHidden, 3000);
-}
-
-function intervalID() {
-    if (snake.x > 1 && snake.direction === "N") {
-        document.getElementById("snake").style.gridRowStart--;
-        snake.x--;
-    } else if (snake.x < 10 && snake.direction === "S") {
-        document.getElementById("snake").style.gridRowStart++;
-        snake.x++;
-    } else if (snake.y > 1 && snake.direction === "W") {
-        document.getElementById("snake").style.gridColumnStart--;
-        snake.y--;
-    } else if (snake.y < 10 && snake.direction === "E") {
-        document.getElementById("snake").style.gridColumnStart++;
-        snake.y++;
-    } else {
-        gameOver();
-    }
-}
+} 
 
 function moveForward() {
     if (snake.x > 1) {
-        document.getElementById("snake").style.gridRowStart--;
+        snakeDiv.style.gridRowStart--;
         snake.x--;
         snake.direction = "N";
+        checkColWithBoris();
+        checkColWithPints();
     } else {
         gameOver();
     }
@@ -140,9 +122,11 @@ function moveForward() {
 
 function moveBackwards() {
     if (snake.x < 10) {
-        document.getElementById("snake").style.gridRowStart++;
+        snakeDiv.style.gridRowStart++;
         snake.x++;
         snake.direction = "S";
+        checkColWithBoris();
+        checkColWithPints();
     } else {
         gameOver();
     }
@@ -150,9 +134,11 @@ function moveBackwards() {
 
 function moveLeft() {
     if (snake.y > 1) {
-        document.getElementById("snake").style.gridColumnStart--;
+        snakeDiv.style.gridColumnStart--;
         snake.y--;
         snake.direction = "W";
+        checkColWithBoris();
+        checkColWithPints();
     } else {
         gameOver();
     }
@@ -160,11 +146,25 @@ function moveLeft() {
 
 function moveRight() {
     if (snake.y < 10) {
-        document.getElementById("snake").style.gridColumnStart++;
+        snakeDiv.style.gridColumnStart++;
         snake.y++;
         snake.direction = "E";
+        checkColWithBoris();
+        checkColWithPints();
     } else {
         gameOver();
+    }
+}
+
+function intervalID() {
+    if (snake.direction === "N") {
+        moveForward();
+    } else if (snake.direction === "S") {
+        moveBackwards();
+    } else if (snake.direction === "W") {
+        moveLeft();
+    } else if (snake.direction === "E") {
+        moveRight();
     }
 }
 
@@ -180,36 +180,39 @@ document.onkeydown = function (e) {
     } else {
         return;
     }
-}
-
+};
 
 function createPint() {
     var pintDiv = document.createElement("div");
-    pintDiv.id = "pint"
+    pintDiv.classList.add("pints");
     pintDiv.style.width = "60px";
     pintDiv.style.height = "60px";
     pintDiv.style.backgroundImage = "url('./images/pint.png')";
-    pintDiv.style.gridRowStart = Math.floor(Math.random() * 10);
-    pintDiv.style.gridColumnStart = Math.floor(Math.random() * 10);
-    document.getElementById("grid").appendChild(pintDiv);
+    pintDiv.style.gridRowStart = (Math.floor(Math.random() * 9))+1;
+    pintDiv.style.gridColumnStart = (Math.floor(Math.random() * 9))+1;
+    gridDiv.appendChild(pintDiv);
 }
 
 function removePint() {
-    document.getElementById("pint").remove();
+    document.querySelector(".pints").remove();
 }
 
 function checkColWithPints() {
-    var pint = {
-        x: Number(document.getElementById("pint").style.gridRowStart),
-        y: Number(document.getElementById("pint").style.gridColumnStart)
-    }
-    if (snake.x === pint.x && snake.y === pint.y) {
+    var pintElements = document.querySelectorAll(".pints");
+    pintElements.forEach(function(pintElement) {
+        var pint = {
+            x: Number(pintElement.style.gridRowStart),
+            y: Number(pintElement.style.gridColumnStart)
+        };
+    
+        if (snake.x === pint.x && snake.y === pint.y) {
         score++;
-        console.log(score);
         scoreDiv.innerHTML = `YOUR SCORE<br><br>${score}`;
-        removePint();
+        pintElement.remove();
         createPint();
-    }
+        }
+    });
+
     if (score === 10 && !win) {
         win = true;
         youWin();
@@ -218,84 +221,80 @@ function checkColWithPints() {
 
 function pintToCatch() {
     createPint();
-    let newInterval = setInterval(checkColWithPints, 1);
-    checkInterval2.push(newInterval);
-    setTimeout(removePint, 5000);
+    setTimeout(removePint, 4000);
 }
 
 function createBoris() {
     var borisDiv = document.createElement("div");
-    borisDiv.id = "boris";
+    borisDiv.classList.add("boris");
     borisDiv.style.width = "60px";
     borisDiv.style.height = "60px";
     borisDiv.style.backgroundImage = "url('./images/boris.png')";
-    borisDiv.style.gridRowStart = Math.floor(Math.random() * 10);
-    borisDiv.style.gridColumnStart = Math.floor(Math.random() * 10);
-    document.getElementById("grid").appendChild(borisDiv);
+    borisDiv.style.gridRowStart = (Math.floor(Math.random() * 9))+1;
+    borisDiv.style.gridColumnStart = (Math.floor(Math.random() * 9))+1;
+    gridDiv.appendChild(borisDiv);
 }
 
 function removeBoris() {
-    document.getElementById("boris").remove();
+    document.querySelector(".boris").remove();
 }
 
 function checkColWithBoris() {
-    var boris = {
-        x: Number(document.getElementById("boris").style.gridRowStart),
-        y: Number(document.getElementById("boris").style.gridColumnStart)
-    }
-    if (snake.x === boris.x && snake.y === boris.y) {
-        removeBoris();
-        gameOver();
-    }
+    var borisElements = document.querySelectorAll(".boris");
+    borisElements.forEach(function(borisElement) {
+        var boris = {
+            x: Number(borisElement.style.gridRowStart),
+            y: Number(borisElement.style.gridColumnStart)
+        };
+
+        if (snake.x === boris.x && snake.y === boris.y) {
+            borisElement.remove();
+            gameOver();
+        }
+    });
 }
 
 function borisToAvoid() {
     createBoris();
-    let newInterval = setInterval(checkColWithBoris, 1);
-    checkInterval.push(newInterval)
-    setTimeout(removeBoris, 2000);
+    setTimeout(removeBoris, 3000);
 }
 
 btnStopDiv.onclick = function () {
-    clearInterval(setInt);
-    clearInterval(setIntBoris);
-    clearInterval(setIntPint);
     window.location.reload();
-}
+};
 
 btnStartDiv.onclick = function () {
-    document.getElementById("levels").style.visibility = "visible";
-}
+    levelsDiv.style.visibility = "visible";
+};
 
 btnCloseStart.onclick = function closeStart() {
-    document.getElementById("levels").style.visibility = "hidden";
+    levelsDiv.style.visibility = "hidden";
+};
+
+function launchDrawLoop(rateHat, rateBoris, ratePint) {
+    levelsDiv.style.visibility = "hidden";
+    setInt = setInterval(intervalID, rateHat);
+    setIntBoris = setInterval(borisToAvoid, rateBoris);
+    setIntPint = setInterval(pintToCatch, ratePint);
 }
 
 btnEasy.onclick = function () {
-    document.getElementById("levels").style.visibility = "hidden";
-    setInt = setInterval(intervalID, 1000);
-    setIntBoris = setInterval(borisToAvoid, 3000);
-    setIntPint = setInterval(pintToCatch, 2000);
-}
+    launchDrawLoop(1000, 2000, 2000);
+};
+
 
 btnMedium.onclick = function () {
-    document.getElementById("levels").style.visibility = "hidden";
-    setInt = setInterval(intervalID, 1000);
-    setIntBoris = setInterval(borisToAvoid, 1000);
-    setIntPint = setInterval(pintToCatch, 2000);
-}
+    launchDrawLoop(1000, 1000, 3000);
+};
 
 btnHard.onclick = function () {
-    document.getElementById("levels").style.visibility = "hidden";
-    setInt = setInterval(intervalID, 500);
-    setIntBoris = setInterval(borisToAvoid, 500);
-    setIntPint = setInterval(pintToCatch, 3000);
-}
+    launchDrawLoop(500, 500, 3000);
+};
 
 btnRules.onclick = function openRules() {
-    document.getElementById("rules").style.visibility = "visible";
-}
+    rulesDiv.style.visibility = "visible";
+};
 
 btnCloseRules.onclick = function closeRules() {
-    document.getElementById("rules").style.visibility = "hidden";
-}
+    rulesDiv.style.visibility = "hidden";
+};

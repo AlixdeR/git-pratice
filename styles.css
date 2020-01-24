@@ -27,11 +27,11 @@
     filter: contrast(150%);
 }
 
-#boris {
+.boris {
     filter: contrast(150%);
 }
 
-#pint {
+.pints {
     filter: contrast(150%);
 }
 
